@@ -50,6 +50,10 @@ papers (MCP)  →  CasewareBridgeAdapter  →  documented bridge protocol
 
 That split is also a licensing boundary. The protocol and the adapter are ours and are open. Anything linking Caseware's own SDK belongs to the bridge, distributed separately under the terms Caseware's agreements require.
 
+**What that bridge can actually do, and the one path that needs no SDK at all, is in
+[docs/caseware-surface.md](docs/caseware-surface.md)** — the documented COM surface, the
+file formats Caseware itself round-trips through, and what remains unverified.
+
 **Before using this across more than one firm, read [docs/security.md](docs/security.md).** Caseware's API Usage Policy permits a customer to engage a third-party developer for its own internal purposes, and separately requires a formal partner review and written approval before an integration is commercialized or offered to multiple firms.
 
 ## Install

@@ -31,6 +31,12 @@ This keeps the open-source surface free of anything licensed, and keeps the lice
 
 ## 3. Caseware's API Usage Policy
 
+> The **mechanism** this policy governs — the COM surface, the Cloud REST API, and the file
+> exports that need neither — is documented separately in
+> [caseware-surface.md](caseware-surface.md). The constraint below is the one that decides how a
+> bridge may be deployed; that file only describes what one could technically do.
+
+
 Read the policy before deploying this anywhere: <https://www.caseware.com/legal/api-usage-policy>
 
 Three clauses govern how this adapter may be used.
