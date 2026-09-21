@@ -150,6 +150,58 @@ onto that directly:
 - Neither should report a capability that depends on the Cloud REST API for trial balances or
   documents, because no public documentation establishes one.
 
+## Sherlock — the trial balance, and it is not the SDK
+
+Written off too early elsewhere. **Caseware Sherlock** exposes a REST API over `trialbalance`
+and `mapping` datasets, plus documents and issues, and pushes them to tools like Power BI.
+It needs **no SDK EULA and no partner review** — only a licence the firm buys from
+`my.caseware.com` like any other module.
+
+Three things decide whether it is usable at a given firm:
+
+- **It is read-only.** Nothing returns to an engagement through Sherlock, so
+  `write_*` stays `false` on any adapter built on it, permanently.
+- **Extraction is nightly**, from files published to Cloud. It is a reporting warehouse, not
+  a live view. A balance read at 09:00 is last night's, and an adapter must say so rather
+  than implying otherwise.
+- **The firm must publish to Cloud.** A firm keeping everything on a network share has
+  nothing in Sherlock to read — detect that and report it, never return an empty balance.
+
+## 🚨 The Desktop SDK is closed to us, not merely expensive
+
+The section above treats the SDK add-on licence as a cost. It is also a prohibition, and
+that changes the plan rather than its budget. Caseware's own SDK documentation:
+
+> "The CaseWare SDK license is available as an add-on license to some existing Working
+> Papers clients and is intended strictly for use by the licensed client and is **not made
+> available to third-party developers**."
+
+> "The SDK license is not transferrable and **cannot be used by third-party developers
+> outside your firm**."
+
+> "does not permit the development of templates, scripts, etc. for resale or distribution
+> outside of the licensed firm."
+
+Every SDK client signs an annual SDK EULA to that effect.
+
+**A bridge we author and hand to a firm is exactly that** — development by a third-party
+developer, distributed to the licensed firm from outside it. Holding the firm's licence
+rather than our own does not change it: the restriction is on who develops and where the
+result goes. The desktop path needs the firm's own people building against their own
+licence, or a partner agreement with Caseware.
+
+## The order this implies
+
+1. **Exports.** Work today, at any firm, with no licence conversation. Prove the concepts
+   and the mapping against real files first.
+2. **Cloud API** where a firm is on Cloud — practice structure, credentials the firm issues
+   itself.
+3. **Sherlock** where a firm has it or will buy it — the trial balance, read-only, nightly.
+4. **Desktop SDK** only behind a partner agreement, or built by the firm's own staff.
+
+None of it changes the credential boundary in [security.md](security.md): whatever the
+surface, credentials stay in the firm's environment and this repository holds none.
+
 ## Sources
 
 [API Usage Policy v3.0](https://www.caseware.com/legal/api-usage-policy) ·
