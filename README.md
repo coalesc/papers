@@ -4,7 +4,7 @@ Open interface for accounting working papers and engagements.
 
 **papers lets software and AI work with an engagement through portable accounting concepts — engagements, trial balances, adjustments, working papers, review notes — instead of one vendor's file format and field IDs.** Caseware is the first adapter.
 
-> **Status:** early development. The concepts and the adapter contract are defined. The Caseware bridge is specified but not implemented, and every capability it reports is `false`. Treat this as infrastructure under construction, not production software.
+> **Status:** early development. The concepts and the adapter contract are defined. The Caseware adapter is specified but not implemented, and every capability it reports is `false`. Treat this as infrastructure under construction, not production software.
 
 ## The idea
 
@@ -34,23 +34,35 @@ Grouping numbers differ between firms, and between files at the same firm. There
 
 The mapping belongs to the firm's own methodology, informed by the prior-year file and the accounts themselves, and confirmed by a person when it is uncertain. `papers` carries it; it does not decide it.
 
-## The Caseware bridge
+## Reaching Caseware
 
-Working Papers is a desktop application. Firms run it on Windows, often through Citrix, against files on a network share. Nothing outside the firm can reach it directly.
+Caseware is three surfaces, not one, and they do not answer the same questions.
 
-So the adapter speaks to a small bridge running inside the firm's environment, beside the files, holding whatever licensed components Caseware requires:
+| Surface | What it holds | Read | Write | What the firm needs |
+|---|---|---|---|---|
+| **Cloud API** | practice data — entities, users, engagements | ✅ | ✅ practice data | a Cloud site; credentials self-issued by the firm |
+| **Sherlock** | **trial balance**, mappings, documents, issues | ✅ | ❌ | a separate Sherlock licence; files published to Cloud |
+| **Desktop SDK** | Working Papers itself | ✅ | ✅ | an SDK licence, a signed annual SDK EULA — **and a partner agreement, for us** |
+
+Under all three, the floor that works at any firm today: the firm's own export — GIFI, the Working Trial Balance to Excel, or Cloud's *Export to Working Papers (CSV ASCII)*. A person clicks it, we read the file, nothing is licensed.
+
+**The Desktop SDK is not a path we can take alone.** Caseware's SDK licence is "not transferrable and cannot be used by third-party developers outside your firm", and does not permit development "for resale or distribution outside of the licensed firm". A bridge we author and hand to a firm is exactly that, whoever's licence it runs under. It needs the firm's own people, or a partner agreement.
+
+So the order is: exports, then the Cloud API, then Sherlock for the trial balance, then the desktop only behind an agreement. **[docs/caseware-surfaces.md](docs/caseware-surfaces.md)** has the detail and the sources.
+
+What does not change is the credential boundary. Working Papers is a desktop application — firms run it on Windows, often through Citrix, against a network share — so where a desktop path is taken it is taken by something running inside the firm's environment, beside the files:
 
 ```
-papers (MCP)  →  CasewareBridgeAdapter  →  documented bridge protocol
-                                                     │
-                              ── firm environment ───┼───────────────
-                                                     ▼
-                                          bridge  →  Working Papers
+papers (MCP)  →  adapter  →  documented bridge protocol
+                                        │
+                 ── firm environment ───┼───────────────
+                                        ▼
+                             bridge  →  Working Papers
 ```
 
-That split is also a licensing boundary. The protocol and the adapter are ours and are open. Anything linking Caseware's own SDK belongs to the bridge, distributed separately under the terms Caseware's agreements require.
+The protocol and the adapters are ours and are open. Anything linking Caseware's own SDK is not distributed from here at all.
 
-**Before using this across more than one firm, read [docs/security.md](docs/security.md).** Caseware's API Usage Policy permits a customer to engage a third-party developer for its own internal purposes, and separately requires a formal partner review and written approval before an integration is commercialized or offered to multiple firms.
+**Before using any of this across more than one firm, read [docs/security.md](docs/security.md).** Caseware's API Usage Policy permits a customer to engage a third-party developer for its own internal purposes, and separately requires a formal partner review and written approval before an integration is commercialized or offered to multiple firms.
 
 ## Install
 

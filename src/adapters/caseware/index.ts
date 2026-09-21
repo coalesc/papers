@@ -11,8 +11,25 @@
  *
  * That split is deliberate and it is also a licensing boundary. The protocol and
  * this adapter are ours and are open. Anything that links Caseware's own SDK
- * belongs to the bridge, which is distributed separately and under whatever
- * terms Caseware's agreements require.
+ * belongs to the bridge, which is not distributed from this repository.
+ *
+ * ⚠️ And the bridge is not ours to write on a firm's behalf either. Caseware's
+ * SDK licence is "not transferrable and cannot be used by third-party developers
+ * outside your firm", and does not permit development "for resale or distribution
+ * outside of the licensed firm". Holding the firm's licence rather than our own
+ * does not change that: the restriction is on who develops and where the result
+ * goes. A desktop bridge is the firm's own to build, or it waits for a partner
+ * agreement.
+ *
+ * ## The surfaces that do not need one
+ *
+ * Caseware's **Cloud API** reaches practice data — entities, users, engagements —
+ * on credentials a firm issues itself. **Sherlock** reaches the trial balance and
+ * mappings, read-only, extracted nightly from files published to Cloud, on a
+ * licence the firm buys directly. Neither needs an SDK EULA or a partner review,
+ * and between them they cover most of what this library wants to read.
+ *
+ * See `docs/caseware-surfaces.md`. This adapter is the desktop one.
  *
  * ## Before this is used across firms
  *
