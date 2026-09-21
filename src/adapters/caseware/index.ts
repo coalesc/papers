@@ -29,7 +29,7 @@
  * licence the firm buys directly. Neither needs an SDK EULA or a partner review,
  * and between them they cover most of what this library wants to read.
  *
- * See `docs/caseware-surfaces.md`. This adapter is the desktop one.
+ * See `docs/caseware-surface.md`. This adapter is the desktop one.
  *
  * ## Before this is used across firms
  *

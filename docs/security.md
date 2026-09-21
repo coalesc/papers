@@ -17,7 +17,7 @@ Adapters declare `idempotent_writes`. When true, `commit` requires an `idempoten
 
 The Caseware adapter does not hold credentials, reach a network share, or link any vendor SDK. It speaks to a bridge running inside the firm's own environment, which holds all of that.
 
-This is the boundary that survives every change of surface. Which Caseware surface a deployment uses — the Cloud API, Sherlock, an export, or the desktop — changes what can be read and written, and changes nothing here. See [caseware-surfaces.md](caseware-surfaces.md).
+This is the boundary that survives every change of surface. Which Caseware surface a deployment uses — the Cloud API, Sherlock, an export, or the desktop — changes what can be read and written, and changes nothing here. See [caseware-surface.md](caseware-surface.md).
 
 ```
                           firm environment
@@ -32,6 +32,12 @@ papers  →  adapter  │  bridge  →  Working Papers │
 This keeps the open-source surface free of anything licensed, and keeps the licensed, credential-holding component in the one place a firm controls and can audit.
 
 ## 3. Caseware's API Usage Policy
+
+> The **mechanism** this policy governs — the COM surface, the Cloud REST API, and the file
+> exports that need neither — is documented separately in
+> [caseware-surface.md](caseware-surface.md). The constraint below is the one that decides how a
+> bridge may be deployed; that file only describes what one could technically do.
+
 
 Read the policy before deploying this anywhere: <https://www.caseware.com/legal/api-usage-policy>
 

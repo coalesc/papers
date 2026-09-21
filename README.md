@@ -48,7 +48,7 @@ Under all three, the floor that works at any firm today: the firm's own export �
 
 **The Desktop SDK is not a path we can take alone.** Caseware's SDK licence is "not transferrable and cannot be used by third-party developers outside your firm", and does not permit development "for resale or distribution outside of the licensed firm". A bridge we author and hand to a firm is exactly that, whoever's licence it runs under. It needs the firm's own people, or a partner agreement.
 
-So the order is: exports, then the Cloud API, then Sherlock for the trial balance, then the desktop only behind an agreement. **[docs/caseware-surfaces.md](docs/caseware-surfaces.md)** has the detail and the sources.
+So the order is: exports, then the Cloud API, then Sherlock for the trial balance, then the desktop only behind an agreement. **[docs/caseware-surface.md](docs/caseware-surface.md)** has the detail and the sources.
 
 What does not change is the credential boundary. Working Papers is a desktop application — firms run it on Windows, often through Citrix, against a network share — so where a desktop path is taken it is taken by something running inside the firm's environment, beside the files:
 
